@@ -18,10 +18,11 @@ class EmployeesAddForm extends Component {
 
   render () {
     const {name, salary} = this.state;
+    const {onAdd} = this.props;
     return (
       <div className="app-add-form">
         <h3>Добавьте нового сотрудника</h3>
-        <form className="add-form d-flex">
+        <form onSubmit={ (e) => onAdd(name, salary, e)}  className="add-form d-flex">
           <input
             name="name"
             onChange={this.onValueChange}
@@ -39,7 +40,7 @@ class EmployeesAddForm extends Component {
             placeholder="З/П в $?"
           />
   
-          <button type="submit" className="btn btn-outline-light">
+          <button type="submit"  className="btn btn-outline-light">
             Добавить
           </button>
         </form>
