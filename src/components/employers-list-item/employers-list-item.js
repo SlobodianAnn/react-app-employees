@@ -1,49 +1,26 @@
 import './employers-list-item.css';
-import {Component} from 'react';
 
-class EmployersListItem extends Component {
-  constructor(props){
-    super(props);
-    this.state = {
-      increase: false,
-      star: false,
-    }
-  }
-
-  onIncrease = () => {
-    this.setState(({increase}) => ({
-      increase: !increase
-    }))
-  }
-
-  selectUser = () => {
-    this.setState(({star}) => ({
-      star: !star
-    }))
-  }
-
+const EmployersListItem = (props) =>  {
   
- render(){
-  const {name, salary, onDelete} = this.props;
-  const {increase, star} = this.state;
+  const {name, salary, onDelete, onToggleProp, increase, rise} = props;
 
   let classNames = "list-group-item d-flex justify-content-between"
   if(increase){
     classNames += " increase"
   }
-  if(star){
+  if(rise){
     classNames += " like"
   }
   return (
     <li className={classNames}>
-      <span onClick={this.selectUser} className="list-group-item-label ">{name}</span>
+      <span onClick={onToggleProp} className="list-group-item-label " data-toggle="rise">{name}</span>
       <input
         type="text"
         className="list-group-item-input"
         defaultValue={salary + '$'}
       />
       <div className="d-flex justify-content-center align3-items-center">
-        <button onClick={this.onIncrease} type="button" className="btn-cookie btn-sm">
+        <button data-toggle="increase" onClick={onToggleProp} type="button" className="btn-cookie btn-sm">
           <i className="fas fa-cookie"></i>
         </button>
         <button onClick={onDelete} type="button" className="btn-trash btn-sm">
@@ -53,7 +30,7 @@ class EmployersListItem extends Component {
       </div>
     </li>
   );
- }
+ 
 };
 
 export default EmployersListItem;
